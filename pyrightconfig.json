@@ -1,0 +1,13 @@
+{
+  "include": ["."],
+  "extraPaths": [
+    ".",
+    "agents",
+    "components",
+    "C:\\Users\\Shreenithi\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages"
+  ],
+  "pythonVersion": "3.12",
+  "reportUndefinedVariable": "none",
+  "reportMissingImports": "none",
+  "reportGeneralTypeIssues": "none"
+}

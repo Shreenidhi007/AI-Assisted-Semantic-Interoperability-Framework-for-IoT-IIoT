@@ -1,0 +1,182 @@
+[
+  {
+    "id": "hydro_01",
+    "domain": "hydroponics",
+    "anchor": "water_temp",
+    "positive": "s4watr:WaterTemperature - Water and nutrient solution temperature in reservoir",
+    "hard_negative": "saref:Temperature - Ambient atmospheric air temperature",
+    "positive_uri": "https://saref.etsi.org/saref4watr/Temperature",
+    "negative_uri": "https://saref.etsi.org/core/Temperature",
+    "explanation": "Hydroponic telemetry measures liquid solution temperature, not ambient air temperature."
+  },
+  {
+    "id": "hydro_02",
+    "domain": "hydroponics",
+    "anchor": "tds_ppm",
+    "positive": "s4watr:TotalDissolvedSolids - Total dissolved solids concentration in nutrient water",
+    "hard_negative": "s4watr:Turbidity - Cloudiness and suspended particulate matter in liquid",
+    "positive_uri": "https://saref.etsi.org/saref4watr/TotalDissolvedSolids",
+    "negative_uri": "https://saref.etsi.org/saref4watr/Turbidity",
+    "explanation": "TDS measures dissolved mineral ions in ppm, whereas turbidity measures optical clarity (NTU)."
+  },
+  {
+    "id": "hydro_03",
+    "domain": "hydroponics",
+    "anchor": "ph_probe",
+    "positive": "s4watr:HydrogenIonConcentration - Acidity or basicity level of nutrient reservoir",
+    "hard_negative": "s4watr:Conductivity - Electrical conductivity of ionic solution",
+    "positive_uri": "https://saref.etsi.org/saref4watr/HydrogenIonConcentration",
+    "negative_uri": "https://saref.etsi.org/saref4watr/Conductivity",
+    "explanation": "pH probe monitors logarithmic hydrogen ion activity, distinct from bulk electrical conductivity."
+  },
+  {
+    "id": "hydro_04",
+    "domain": "hydroponics",
+    "anchor": "ec_value",
+    "positive": "s4watr:Conductivity - Electrical conductivity representing dissolved salt nutrients in mS/cm",
+    "hard_negative": "s4watr:TotalDissolvedSolids - Mass estimate of dissolved solids in parts per million",
+    "positive_uri": "https://saref.etsi.org/saref4watr/Conductivity",
+    "negative_uri": "https://saref.etsi.org/saref4watr/TotalDissolvedSolids",
+    "explanation": "EC directly quantifies electrical conductance in mS/cm before conversion to TDS."
+  },
+  {
+    "id": "hydro_05",
+    "domain": "hydroponics",
+    "anchor": "flow_rate_lpm",
+    "positive": "s4watr:FlowRate - Rate of liquid nutrient volume passing per unit time",
+    "hard_negative": "s4watr:WaterLevel - Static vertical height of liquid in tank",
+    "positive_uri": "https://saref.etsi.org/saref4watr/FlowRate",
+    "negative_uri": "https://saref.etsi.org/saref4watr/WaterLevel",
+    "explanation": "Flow rate denotes volumetric fluid velocity, whereas water level is linear depth."
+  },
+  {
+    "id": "aq_01",
+    "domain": "air_quality",
+    "anchor": "pm25_calibrated",
+    "positive": "s4envi:ParticulateMatter - Fine respirable atmospheric particulate matter <= 2.5 microns",
+    "hard_negative": "s4envi:CO2Concentration - Carbon dioxide gas molecule concentration",
+    "positive_uri": "https://saref.etsi.org/saref4envi/ParticulateMatter",
+    "negative_uri": "https://saref.etsi.org/saref4envi/CO2Concentration",
+    "explanation": "PM2.5 represents physical aerosol dust particles, not gaseous carbon compounds."
+  },
+  {
+    "id": "aq_02",
+    "domain": "air_quality",
+    "anchor": "co2_ppm",
+    "positive": "s4envi:CO2Concentration - Ambient carbon dioxide concentration measured in parts per million",
+    "hard_negative": "s4envi:VOCConcentration - Volatile organic compound total concentration",
+    "positive_uri": "https://saref.etsi.org/saref4envi/CO2Concentration",
+    "negative_uri": "https://saref.etsi.org/saref4envi/VOCConcentration",
+    "explanation": "CO2 is an inorganic greenhouse gas, whereas VOC encompasses volatile carbon chains (toluene, benzene)."
+  },
+  {
+    "id": "aq_03",
+    "domain": "air_quality",
+    "anchor": "voc_index",
+    "positive": "s4envi:VOCConcentration - Total volatile organic chemical gaseous pollutants",
+    "hard_negative": "s4envi:AirQualityIndex - Composite numerical index rating overall atmospheric safety",
+    "positive_uri": "https://saref.etsi.org/saref4envi/VOCConcentration",
+    "negative_uri": "https://saref.etsi.org/saref4envi/AirQualityIndex",
+    "explanation": "VOC index measures specific gaseous hydrocarbon chemicals rather than a consolidated multidimensional AQI."
+  },
+  {
+    "id": "aq_04",
+    "domain": "air_quality",
+    "anchor": "ambient_temp",
+    "positive": "saref:Temperature - Ambient air environmental dry-bulb temperature",
+    "hard_negative": "s4watr:WaterTemperature - Fluid and water body thermal measurement",
+    "positive_uri": "https://saref.etsi.org/core/Temperature",
+    "negative_uri": "https://saref.etsi.org/saref4watr/Temperature",
+    "explanation": "In atmospheric stations, ambient temperature monitors the surrounding gas matrix."
+  },
+  {
+    "id": "aq_05",
+    "domain": "air_quality",
+    "anchor": "rel_humidity",
+    "positive": "saref:Humidity - Atmospheric relative humidity percentage in air",
+    "hard_negative": "s4agri:SoilMoisture - Volumetric soil water content percentage in subterranean substrate",
+    "positive_uri": "https://saref.etsi.org/core/Humidity",
+    "negative_uri": "https://saref.etsi.org/saref4agri/SoilMoisture",
+    "explanation": "Air humidity refers to airborne vapor saturation, distinct from soil matric water content."
+  },
+  {
+    "id": "water_01",
+    "domain": "smart_water",
+    "anchor": "turbidity_ntu",
+    "positive": "s4watr:Turbidity - Optical nephelometric turbidity units indicating suspended particles in water",
+    "hard_negative": "s4watr:TotalDissolvedSolids - Soluble inorganic salts dissolved completely in solution",
+    "positive_uri": "https://saref.etsi.org/saref4watr/Turbidity",
+    "negative_uri": "https://saref.etsi.org/saref4watr/TotalDissolvedSolids",
+    "explanation": "Turbidity assesses light scattering by undissolved solids, whereas TDS measures dissolved chemical ions."
+  },
+  {
+    "id": "water_02",
+    "domain": "smart_water",
+    "anchor": "dissolved_o2",
+    "positive": "s4watr:DissolvedOxygen - Concentration of gaseous oxygen molecules dissolved in water",
+    "hard_negative": "s4watr:HydrogenIonConcentration - Negative logarithm of hydrogen ion activity (pH)",
+    "positive_uri": "https://saref.etsi.org/saref4watr/DissolvedOxygen",
+    "negative_uri": "https://saref.etsi.org/saref4watr/HydrogenIonConcentration",
+    "explanation": "Dissolved oxygen quantifies aqueous O2 support for aquatic respiration, not electrochemical pH."
+  },
+  {
+    "id": "water_03",
+    "domain": "smart_water",
+    "anchor": "tank_level",
+    "positive": "s4watr:WaterLevel - Height or depth of water column in storage tank or reservoir",
+    "hard_negative": "s4watr:WaterPressure - Force exerted per unit area by pressurized water",
+    "positive_uri": "https://saref.etsi.org/saref4watr/WaterLevel",
+    "negative_uri": "https://saref.etsi.org/saref4watr/WaterPressure",
+    "explanation": "Water level denotes geometric surface distance, distinct from dynamic pipeline hydrostatic pressure."
+  },
+  {
+    "id": "water_04",
+    "domain": "smart_water",
+    "anchor": "pipe_pressure_bar",
+    "positive": "s4watr:WaterPressure - Static and dynamic fluid pressure inside distribution pipeline",
+    "hard_negative": "s4watr:FlowRate - Volumetric discharge speed through pipe section",
+    "positive_uri": "https://saref.etsi.org/saref4watr/WaterPressure",
+    "negative_uri": "https://saref.etsi.org/saref4watr/FlowRate",
+    "explanation": "Water pressure measures mechanical pipe wall stress, distinct from velocity of fluid discharge."
+  },
+  {
+    "id": "garden_01",
+    "domain": "smart_garden",
+    "anchor": "soil_moist_pct",
+    "positive": "s4agri:SoilMoisture - Volumetric soil moisture content in rhizosphere",
+    "hard_negative": "saref:Humidity - Atmospheric relative humidity percentage",
+    "positive_uri": "https://saref.etsi.org/saref4agri/SoilMoisture",
+    "negative_uri": "https://saref.etsi.org/core/Humidity",
+    "explanation": "Soil moisture measures root substrate water content, whereas humidity is airborne moisture."
+  },
+  {
+    "id": "garden_02",
+    "domain": "smart_garden",
+    "anchor": "soil_temp_c",
+    "positive": "s4agri:SoilTemperature - Thermal reading inside root soil bed",
+    "hard_negative": "saref:Temperature - Ambient atmospheric canopy air temperature",
+    "positive_uri": "https://saref.etsi.org/saref4agri/SoilTemperature",
+    "negative_uri": "https://saref.etsi.org/core/Temperature",
+    "explanation": "Subterranean root temperature lags and differs significantly from canopy ambient air temperature."
+  },
+  {
+    "id": "garden_03",
+    "domain": "smart_garden",
+    "anchor": "light_lux",
+    "positive": "s4envi:LightIntensity - Photosynthetic illuminance and solar radiation lux",
+    "hard_negative": "saref:Temperature - Thermal kinetic energy reading",
+    "positive_uri": "https://saref.etsi.org/saref4envi/LightIntensity",
+    "negative_uri": "https://saref.etsi.org/core/Temperature",
+    "explanation": "Light intensity quantifies luminous flux on plant leaves, distinct from ambient thermal heat."
+  },
+  {
+    "id": "garden_04",
+    "domain": "smart_garden",
+    "anchor": "rain_gauge_mm",
+    "positive": "s4agri:Precipitation - Rainfall accumulation depth per time interval",
+    "hard_negative": "s4watr:WaterLevel - Continuous surface level of standing water body",
+    "positive_uri": "https://saref.etsi.org/saref4agri/Precipitation",
+    "negative_uri": "https://saref.etsi.org/saref4watr/WaterLevel",
+    "explanation": "Precipitation measures incremental meteorological rainfall accumulation, not reservoir level."
+  }
+]

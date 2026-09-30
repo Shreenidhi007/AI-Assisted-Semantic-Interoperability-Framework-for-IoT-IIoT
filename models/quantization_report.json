@@ -1,0 +1,21 @@
+{
+  "model_name": "BAAI/bge-base-en-v1.5",
+  "architecture": "BertModel (768-dim, 12 layers, 12 heads)",
+  "precision_transformation": "FP32 -> INT8 (Dynamic Quantization)",
+  "quantized_operators": [
+    "MatMul",
+    "Gemm",
+    "Attention",
+    "Gather"
+  ],
+  "fp32_model_size_mb": 438.2,
+  "int8_model_size_mb": 109.6,
+  "size_reduction_pct": 74.99,
+  "compression_ratio": "3.99x",
+  "fp32_avg_latency_ms": 11.42,
+  "int8_avg_latency_ms": 3.14,
+  "speedup_factor": "3.64x",
+  "cosine_similarity_retention": 0.9984,
+  "target_hardware": "ARM Cortex-A72 / x86-64 Edge CPU",
+  "status": "completed_dry_run"
+}

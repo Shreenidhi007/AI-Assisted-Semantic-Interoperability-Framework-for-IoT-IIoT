@@ -1,0 +1,520 @@
+﻿
+{"step_index":800,"source":"USER_EXPLICIT","type":"USER_INPUT","status":"DONE","created_at":"2026-09-21T06:48:04Z","con
+tent":"<USER_REQUEST>\n      saref:hasValue \"11.39\"^^xsd:float ;\\n'\r\n524248: '            saref:isMeasuredIn 
+unit\"8.66\"^^xsd:float ;\\n'\r\n524249: '            saref:isMeasuredIn unit:PPMsosa:observedProperty 
+s4watr:TotalDissolvedSolids ;\\n'\r\n524250: '    sosa:resultTime \"2026-09-09T13:36:33.650229+05:30\"^^xsd:dateTime 
+.\\n'\r\n524251: '\\n'\r\n524252: 'envobs:obs_hydroponics_tds_6062 a sosa:Observation,\\n'\r\n524253: '        
+saref:Observation ;\\n'\r\n524254: '    enviromap:domain \"hydroponics\" ;\\n'\r\n(venv) 
+cse-dept@cse-dept-HP:~/semantic-interoperability-kg$ cd ~/semantic-interoperability-kg && source 
+venv/bin/activate\r\n\r\npython3 << 'EOF'\r\npath = \"data/output/enviromap_kg.ttl\"\r\n\r\nwith open(path, \"r\", 
+encoding=\"utf-8\") as f:\r\n    lines = f.readlines()\r\n\r\nfixed = False\r\nfor i in range(len(lines)):\r\n    if 
+'unit\"8.66\"' in lines[i]:\r\n        print(f\"Repairing smashed lines at {i+1} and {i+2}...\")\r\n        # Replace 
+the 2 smashed lines with valid Turtle syntax\r\n        replacement = [\r\n            '            saref:isMeasuredIn 
+unit:PPM ] ;\\n',\r\n            '    sosa:hasSimpleResult \"11.39\"^^xsd:float ;\\n',\r\n            '    
+sosa:observedProperty s4watr:TotalDissolvedSolids ;\\n'\r\n        ]\r\n        lines[i:i+2] = replacement\r\nEOF 
+print(f\"Parser check:\\n{e}\")e Graph parsed cleanly: {len(g):,} triples loaded!\")\r\nRepairing smashed lines at 
+524248 and 524249...\r\nSUCCESS: Fixed smashed lines 524248â€“524249!\r\nValidating Knowledge Graph with 
+RDFLib...\r\nParser check:\r\nat line 524661 of <>:\r\nBad syntax (expected '.' or '}' or ']' at end of statement) at 
+^ in:\r\n\"...b' sosa:Observation,\\n        saref:Observation ;\\n    enviromap'^b':domain \"hydroponics\" ;\\n    
+enviromap:mappingConfidence \"1.0'...\"\r\n(venv) cse-dept@cse-dept-HP:~/semantic-interoperability-kg$ python3 -c 
+'\r\nfrom rdflib import Graph\r\nimport io\r\n\r\nwith open(\"data/output/enviromap_kg.ttl\", \"r\", 
+encoding=\"utf-8\") as f:\r\n    lines = f.readlines()\r\n\r\nheader = \"\".join([l for l in lines[:30] if 
+l.strip().startswith(\"@prefix\")]) + \"\\n\"\r\n\r\nstart = 524000\r\nwhile not 
+lines[start].startswith(\"envobs:\"):\r\n    start += 1\r\n\r\nend = 525000\r\nwhile not 
+lines[end].strip().endswith(\".\"):\r\n    end += 1\r\nend += 1\r\n\r\nprint(f\"Testing block from line {start+1} to 
+{end}...\")\r\nchunk = header + \"\".join(lines[start:end])\r\n'   print(f\"Remaining error:\\n{e}\")ed: {len(g):,} 
+triples loaded!\")\r\nTesting block from line 524001 to 525013...\r\nRemaining error:\r\nat line 366 of <>:\r\nBad 
+syntax (expected '.' or '}' or ']' at end of statement) at ^ in:\r\n\"...b':sourceField \"tds\" ;\\n    
+enviromap:sourceTable \"public.onem\"'^b'tds\" ;\\n    enviromap:sourceTable 
+\"publicenviromap:NutrientSo'...\"\r\n(venv) cse-dept@cse-dept-HP:~/semantic-interoperability-kg$ python3 -c '\r\nwith 
+open(\"data/output/enviromap_kg.ttl\", \"r\", encoding=\"utf-8\") as f:\r\n    for i, line in enumerate(f):\r\n        
+if \"publicenviromap\" in line or \"public.onem\\\"tds\" in line:\r\n            print(f\"Exact line {i+1}: 
+{repr(line)}\")\r\n'\r\nExact line 524344: '    enviromap:sourceTable \"public.onem\"tds\" ;\\n'\r\nExact line 524345: 
+'    enviromap:sourceTable \"publicenviromap:NutrientSolution ;\\n'\r\nExact line 576853: '    enviromap:sourceTable 
+\"publicenviromap:mappingMethod \"rule_based\" ;\\n'\r\nExact line 586384: '    enviromap:sourceTable 
+\"publicenviromap:mappingMethod \"rule_based\" ;\\n'\r\n(venv) cse-dept@cse-dept-HP:~/semantic-interoperability-kg$ 
+python3 -c '\r\nwith open(\"data/output/enviromap_kg.ttl\", \"r\", encoding=\"utf-8\") as f:\r\n    lines = 
+f.readlines()\r\n\r\nfor i in range(524340, 524348):\r\n    print(f\"{i+1}: {repr(lines[i])}\")\r\n'\r\n524341: '    
+enviromap:mappingConfidence \"1.0\"^^xsd:float ;\\n'\r\n524342: '    enviromap:mappingMethod \"rule_based\" 
+;\\n'\r\n524343: '    enviromap:sourceField \"tds\" ;\\n'\r\n524344: '    enviromap:sourceTable \"public.onem\"tds\" 
+;\\n'\r\n524345: '    enviromap:sourceTable \"publicenviromap:NutrientSolution ;\\n'\r\n524346: '    sosa:hasResult [ 
+a sosa:Result,\\n'\r\n524347: '                saref:PropertyValue ;\\n'\r\n524348: '            qudt:unit unit:PPM 
+;\\n'\r\n(venv) cse-dept@cse-dept-HP:~/semantic-interoperability-kg$ cd ~/semantic-interoperability-kg && source 
+venv/bin/activate\r\n\r\npython3 << 'EOF'\r\npath = \"data/output/enviromap_kg.ttl\"\r\n\r\nwith open(path, \"r\", 
+encoding=\"utf-8\") as f:\r\n    text = f.read()\r\n\r\nprint(f\"File size: {len(text):,} characters\")\r\n\r\n# 1. 
+Repair lines 524344-524345\r\nbad1 = '    enviromap:sourceTable \"public.onem\"tds\" ;\\n    enviromap:sourceTable 
+\"publicenviromap:NutrientSolution ;\\n'\r\ngood1 = '    enviromap:sourceTable \"public.onem2m_data\" ;\\n    
+sosa:hasFeatureOfInterest enviromap:NutrientSolution ;\\n'\r\n\r\nif bad1 in text:\r\n    text = text.replace(bad1, 
+good1)\r\n    print(\"âœ… Fixed smashed lines 524344-524345\")\r\nEOF print(f\"Remaining parser check:\\n{e}\")h 
+parsed completely: {len(g):,} triples loaded! ðŸŽ‰ðŸŽ‰\");\r\nFile size: 36,237,355 characters\r\nâœ… Fixed smashed 
+lines 524344-524345\r\nâœ… Fixed 2 occurrences of smashed lines 576853 and 586384\r\n\r\nValidating repaired Knowledge 
+Graph with RDFLib parser...\r\nRemaining parser check:\r\nat line 524661 of <>:\r\nBad syntax (expected '.' or '}' or 
+']' at end of statement) at ^ in:\r\n\"...b' sosa:Observation,\\n        saref:Observation ;\\n    
+enviromap'^b':domain \"hydroponics\" ;\\n    enviromap:mappingConfidence \"1.0'...\"\r\n(venv) 
+cse-dept@cse-dept-HP:~/semantic-interoperability-kg$ cd ~/semantic-interoperability-kg && source 
+venv/bin/activate\r\n\r\n# 1. Safely archive the old corrupted file\r\nmv data/output/enviromap_kg.ttl 
+data/output/enviromap_kg_corrupt_archive.ttl\r\nmv data/watermark.json data/watermark_old.json\r\n\r\n# 2. Re-run 
+pipeline to build a 100% clean, valid W3C Knowledge Graph\r\npython3 scripts/run_pipeline.py\r\nTraceback (most recent 
+call last):\r\n  File \"/home/cse-dept/semantic-interoperability-kg/scripts/run_pipeline.py\", line 38, in 
+<module>\r\n    from orchestrator.orchestrator import Orchestrator\r\n  File 
+\"/home/cse-dept/semantic-interoperability-kg/scripts/../orchestrator/orchestrator.py\", line 22, in <module>\r\n    
+from semantic_layer.translator import SemanticTranslator\r\n  File 
+\"/home/cse-dept/semantic-interoperability-kg/scripts/../orchestrator/../agents/../semantic_layer/translator.py\", 
+line 137\r\n    sensor_uri=sensor_uri,\r\n    ^^^^^^^^^^^^^^^^^^^^^\r\nSyntaxError: keyword argument repeated: 
+sensor_uri\r\n(venv) cse-dept@cse-dept-HP:~/semantic-interoperability-kg$ python3 -c \"\r\nfrom agents.nl_sparql_agent 
+import NLSPARQLAgent\r\nagent = NLSPARQLAgent()\r\nres = agent.query('List all deployed W3C SOSA Sensors and host 
+Platforms')\r\nprint('\\nIntent:', res['intent'])\r\nprint('Summary:', res['summary'])\r\nprint('\\nFirst 5 Sensors in 
+Graph:\\n', res['results_df'].head())\r\n\"\r\nFailed to load KG from data/output/enviromap_kg.ttl: [Errno 2] No such 
+file or directory: '/home/cse-dept/data/output/enviromap_kg.ttl'\r\nFailed to load KG from 
+data/output/enviromap_kg.ttl: [Errno 2] No such file or directory: 
+'/home/cse-dept/data/output/enviromap_kg.ttl'\r\n\r\nIntent: Retrieving latest synchronized canonical observations 
+across domains\r\nSummary: Query executed in 0.06s, but found 0 matching observations in the Knowledge 
+Graph.\r\n\r\nFirst 5 Sensors in Graph:\r\n Empty DataFrame\r\nColumns: []\r\nIndex: []\r\n(venv) 
+cse-dept@cse-dept-HP:~/semantic-interoperability-kg$ cd ~/semantic-interoperability-kg && source 
+venv/bin/activate\r\n\r\npython3 -c '\r\nwith open(\"semantic_layer/translator.py\", \"r\", encoding=\"utf-8\") as 
+f:\r\n    lines = f.readlines()\r\n\r\nfor i in range(120, min(len(lines), 150)):\r\n    print(f\"{i+1}: 
+{repr(lines[i])}\")\r\n'\r\n121: '                observation_id=obs_id,\\n'\r\n122: '                
+observed_property_uri=decision.selected_concept_uri,\\n'\r\n123: '                
+observed_property_label=decision.selected_concept_label,\\n'\r\n124: '                value=value,\\n'\r\n125: '       
+         unit=unit,\\n'\r\n126: '                unit_uri=unit_uri,\\n'\r\n127: '                
+result_time=str(timestamp) if timestamp else None,\\n'\r\n128: '                domain=domain,\\n'\r\n129: '           
+     feature_of_interest=foi,\\n'\r\n130: '                sensor_uri=f\"sensor_{domain}_{sensor_id}\" if sensor_id 
+else None,\\n'\r\n131: '                location=location,\\n'\r\n132: '                
+source_table=source_table,\\n'\r\n133: '                source_field=field_name,\\n'\r\n134: '                
+source_value=value,\\n'\r\n135: '                mapping_confidence=decision.confidence,\\n'\r\n136: '                
+mapping_method=decision.mapping_method,\\n'\r\n137: '                sensor_uri=sensor_uri,\\n'\r\n138: '              
+  sensor_label=sensor_label,\\n'\r\n139: '                platform_uri=platform_uri,\\n'\r\n140: '                
+platform_label=platform_label,\\n'\r\n141: '                provenance={\\n'\r\n142: '                    
+\"agent_pipeline\": \"agentic\",\\n'\r\n143: '                    \"concept_uri\": 
+decision.selected_concept_uri,\\n'\r\n144: '                    \"ontology_source\": 
+decision.selected_ontology_source,\\n'\r\n145: '                    \"confidence\": decision.confidence,\\n'\r\n146: ' 
+                   \"llm_used\": decision.llm_used,\\n'\r\n147: '                    \"validation_status\": 
+validation.status,\\n'\r\n148: '                    \"reasoning_chain\": decision.reasoning_chain,\\n'\r\n149: '       
+         },\\n'\r\n150: '            )\\n'\r\n(venv) cse-dept@cse-dept-HP:~/semantic-interoperability-kg$ ^C\r\n(venv) 
+cse-dept@cse-dept-HP:~/semantic-interoperability-kg$ cd ~/semantic-interoperability-kg && source 
+venv/bin/activate\r\n\r\n# 1. Remove the duplicate line 130\r\npython3 -c '\r\nwith 
+open(\"semantic_layer/translator.py\", \"r\", encoding=\"utf-8\") as f:\r\n    lines = f.readlines()\r\n\r\nnew_lines 
+= [l for l in lines if \"sensor_uri=f\\\"sensor_\" not in l]\r\n\r\nwith open(\"semantic_layer/translator.py\", \"w\", 
+encoding=\"utf-8\") as f:\r\n    f.writelines(new_lines)\r\n\r\nimport 
+py_compile\r\npy_compile.compile(\"semantic_layer/translator.py\", doraise=True)\r\nprint(\"SUCCESS: 
+semantic_layer/translator.py compiled cleanly!\")\r\n'\r\n\r\n# 2. Run the pipeline to build a 100% clean, valid W3C 
+Knowledge Graph\r\npython3 scripts/run_pipeline.py\r\nSUCCESS: semantic_layer/translator.py compiled cleanly!\r\n\r\nâ•
+”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â
+•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—\r\nâ•‘                             
+                                     â•‘\r\nâ•‘   EnviroMap-KG â€” Objective 1                                     
+â•‘\r\nâ•‘   Standards-Aware Multi-Agent Semantic Interoperability           â•‘\r\nâ•‘                                
+                                  â•‘\r\nâ•‘   Domains: Air Quality | Hydroponics | Smart Garden | Smart 
+Waterâ•‘\r\nâ•‘   Agents:  Discovery â†’ Alignment â†’ Mapping â†’ Reasoning â†’        â•‘\r\nâ•‘            
+Validation â†’ Learning                                 â•‘\r\nâ•‘   Output:  EnviroMap-KG (RDF Knowledge Graph)       
+             â•‘\r\nâ•‘                                                                  â•‘\r\nâ•šâ•â•â•â•â•â•â•
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â
+•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\r\n    \r\n12:17:32 | enviromap.main                 | 
+INFO    | Initializing orchestrator...\r\n12:17:33 | enviromap.rule_based_engine    | INFO    | Loaded 40 approved 
+known mappings from memory.\r\n12:17:35 | sentence_transformers.SentenceTransformer | INFO    | Use pytorch 
+device_name: cpu\r\n12:17:35 | sentence_transformers.SentenceTransformer | INFO    | Load pretrained 
+SentenceTransformer: all-MiniLM-L6-v2\r\n12:17:38 | enviromap.embedding_model      | INFO    | Loaded 
+sentence-transformers model 'all-MiniLM-L6-v2'\r\n12:17:38 | enviromap.embedding_model      | INFO    | Successfully 
+encoded 35 ontology concepts into embeddings.\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Loaded 40 
+mapping memory entries from /home/cse-dept/semantic-interoperability-kg/data/mapping_memory.json.\r\n12:17:38 | 
+enviromap.orchestrator         | INFO    | Orchestrator initialized [LangGraph engine]\r\n12:17:38 | 
+enviromap.orchestrator         | INFO    | 
+======================================================================\r\nEnviroMap-KG -- LangGraph Pipeline 
+Start\r\n======================================================================\r\n12:17:38 | enviromap.orchestrator   
+      | INFO    | [INTAKE] 2 domain(s) to process\r\n12:17:38 | enviromap.orchestrator         | INFO    |   [1] 
+hydroponics -> hydroponics\r\n12:17:38 | enviromap.orchestrator         | INFO    |   [2] air_quality -> Air 
+quality\r\n12:17:38 | enviromap.orchestrator         | INFO    | \r\nâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€\r\n[Domain 1/2] 
+hydroponics | hydroponics\r\nâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€\r\n12:17:38 | enviromap.orchestrator         | INFO    |  
+ Table: public.onem2m_data\r\n12:17:38 | enviromap.Discovery Agent      | INFO    | Discovery Agent starting 
+processing\r\n12:17:38 | enviromap.Discovery Agent      | INFO    | Discovery profile created for 9 measurement fields 
+in public.onem2m_data\r\n12:17:38 | enviromap.Discovery Agent      | INFO    | Discovery Agent completed in 
+95.6ms\r\n12:17:38 | enviromap.audit                | INFO    | [DISCOVERY] Discovery Agent: Profiled 9 fields | 
+field=public.onem2m_data domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.DataAcquisition      | INFO    | 
+[onem2m_data] Initial run: fetching ALL records (NO LIMIT)\r\n12:17:38 | enviromap.DataAcquisition      | INFO    | 
+Watermark updated: hydroponics.onem2m_data = 2026-09-21 12:14:15.704365+05:30\r\n12:17:38 | enviromap.DataAcquisition  
+    | INFO    | [onem2m_data] Fetched 11450 records\r\n12:17:38 | enviromap.orchestrator         | INFO    |     
+turbidity -> [KNOWN] Turbidity\r\n12:17:38 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based 
+Engine: Known -> Turbidity | field=turbidity domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Validation Agent  
+   | INFO    | Validation Agent starting processing\r\n12:17:38 | enviromap.Validation Agent     | INFO    | 
+Validation Result for 'turbidity' â†’ 'Turbidity': VALID (checks: 6/6 passed)\r\n12:17:38 | enviromap.Validation Agent 
+    | INFO    | Validation Agent completed in 0.1ms\r\n12:17:38 | enviromap.audit                | INFO    | 
+[VALIDATION] Validation Agent: status=VALID conf=1.00 | field=turbidity domain=hydroponics | OK (0.0ms)\r\n12:17:38 | 
+enviromap.Learning Agent       | INFO    | Learning Agent starting processing\r\n12:17:38 | enviromap.Learning Agent   
+    | INFO    | Updated existing mapping memory entry for 'turbidity' in domain 'hydroponics' 
+(use_count=16).\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Learning Agent completed in 0.5ms\r\n12:17:38 
+| enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:38 | 
+enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | field=turbidity 
+domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.orchestrator         | INFO    |     tds -> [KNOWN] Total 
+Dissolved Solids\r\n12:17:38 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: Known -> 
+Total Dissolved Solids | field=tds domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Validation Agent     | INFO 
+   | Validation Agent starting processing\r\n12:17:38 | enviromap.Validation Agent     | INFO    | Validation Result 
+for 'tds' â†’ 'Total Dissolved Solids': VALID (checks: 6/6 passed)\r\n12:17:38 | enviromap.Validation Agent     | INFO 
+   | Validation Agent completed in 0.0ms\r\n12:17:38 | enviromap.audit                | INFO    | [VALIDATION] 
+Validation Agent: status=VALID conf=1.00 | field=tds domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Learning 
+Agent       | INFO    | Learning Agent starting processing\r\n12:17:38 | enviromap.Learning Agent       | INFO    | 
+Updated existing mapping memory entry for 'tds' in domain 'hydroponics' (use_count=16).\r\n12:17:38 | 
+enviromap.Learning Agent       | INFO    | Learning Agent completed in 28.6ms\r\n12:17:38 | 
+enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:38 | 
+enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | field=tds 
+domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.orchestrator         | INFO    |     temperature -> [KNOWN] 
+Temperature\r\n12:17:38 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: Known -> 
+Temperature | field=temperature domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Validation Agent     | INFO    
+| Validation Agent starting processing\r\n12:17:38 | enviromap.Validation Agent     | INFO    | Validation Result for 
+'temperature' â†’ 'Temperature': VALID (checks: 5/6 passed)\r\n12:17:38 | enviromap.Validation Agent     | INFO    | 
+Validation Agent completed in 0.0ms\r\n12:17:38 | enviromap.audit                | INFO    | [VALIDATION] Validation 
+Agent: status=VALID conf=0.81 | field=temperature domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Learning 
+Agent       | INFO    | Learning Agent starting processing\r\n12:17:38 | enviromap.Learning Agent       | INFO    | 
+Updated existing mapping memory entry for 'temperature' in domain 'hydroponics' (use_count=16).\r\n12:17:38 | 
+enviromap.Learning Agent       | INFO    | Learning Agent completed in 28.1ms\r\n12:17:38 | 
+enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:38 | 
+enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | field=temperature 
+domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.orchestrator         | INFO    |     humidity -> [KNOWN] 
+Humidity\r\n12:17:38 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: Known -> Humidity | 
+field=humidity domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Validation Agent     | INFO    | Validation 
+Agent starting processing\r\n12:17:38 | enviromap.Validation Agent     | INFO    | Validation Result for 'humidity' 
+â†’ 'Humidity': VALID (checks: 6/6 passed)\r\n12:17:38 | enviromap.Validation Agent     | INFO    | Validation Agent 
+completed in 0.0ms\r\n12:17:38 | enviromap.audit                | INFO    | [VALIDATION] Validation Agent: 
+status=VALID conf=1.00 | field=humidity domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Learning Agent       | 
+INFO    | Learning Agent starting processing\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Updated existing 
+mapping memory entry for 'humidity' in domain 'hydroponics' (use_count=16).\r\n12:17:38 | enviromap.Learning Agent     
+  | INFO    | Learning Agent completed in 47.5ms\r\n12:17:38 | enviromap.rule_based_engine    | INFO    | Loaded 40 
+approved known mappings from memory.\r\n12:17:38 | enviromap.audit                | INFO    | [LEARNING] Learning 
+Agent: Stored (valid=True) | field=humidity domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.orchestrator       
+  | INFO    |     light_layer1 -> [KNOWN] Light Intensity\r\n12:17:38 | enviromap.audit                | INFO    | 
+[RULE_BASED] Rule-Based Engine: Known -> Light Intensity | field=light_layer1 domain=hydroponics | OK 
+(0.0ms)\r\n12:17:38 | enviromap.Validation Agent     | INFO    | Validation Agent starting processing\r\n12:17:38 | 
+enviromap.Validation Agent     | INFO    | Validation Result for 'light_layer1' â†’ 'Light Intensity': VALID (checks: 
+6/6 passed)\r\n12:17:38 | enviromap.Validation Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:38 | 
+enviromap.audit                | INFO    | [VALIDATION] Validation Agent: status=VALID conf=1.00 | field=light_layer1 
+domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Learning Agent starting 
+processing\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Updated existing mapping memory entry for 
+'light_layer1' in domain 'hydroponics' (use_count=16).\r\n12:17:38 | enviromap.Learning Agent       | INFO    | 
+Learning Agent completed in 27.0ms\r\n12:17:38 | enviromap.rule_based_engine    | INFO    | Loaded 40 approved known 
+mappings from memory.\r\n12:17:38 | enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored 
+(valid=True) | field=light_layer1 domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.orchestrator         | INFO  
+  |     light_layer2 -> [KNOWN] Light Intensity\r\n12:17:38 | enviromap.audit                | INFO    | [RULE_BASED] 
+Rule-Based Engine: Known -> Light Intensity | field=light_layer2 domain=hydroponics | OK (0.0ms)\r\n12:17:38 | 
+enviromap.Validation Agent     | INFO    | Validation Agent starting processing\r\n12:17:38 | enviromap.Validation 
+Agent     | INFO    | Validation Result for 'light_layer2' â†’ 'Light Intensity': VALID (checks: 6/6 
+passed)\r\n12:17:38 | enviromap.Validation Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:38 | 
+enviromap.audit                | INFO    | [VALIDATION] Validation Agent: status=VALID conf=1.00 | field=light_layer2 
+domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Learning Agent starting 
+processing\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Updated existing mapping memory entry for 
+'light_layer2' in domain 'hydroponics' (use_count=16).\r\n12:17:38 | enviromap.Learning Agent       | INFO    | 
+Learning Agent completed in 49.8ms\r\n12:17:38 | enviromap.rule_based_engine    | INFO    | Loaded 40 approved known 
+mappings from memory.\r\n12:17:38 | enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored 
+(valid=True) | field=light_layer2 domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.orchestrator         | INFO  
+  |     light_layer3 -> [KNOWN] Light Intensity\r\n12:17:38 | enviromap.audit                | INFO    | [RULE_BASED] 
+Rule-Based Engine: Known -> Light Intensity | field=light_layer3 domain=hydroponics | OK (0.0ms)\r\n12:17:38 | 
+enviromap.Validation Agent     | INFO    | Validation Agent starting processing\r\n12:17:38 | enviromap.Validation 
+Agent     | INFO    | Validation Result for 'light_layer3' â†’ 'Light Intensity': VALID (checks: 6/6 
+passed)\r\n12:17:38 | enviromap.Validation Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:38 | 
+enviromap.audit                | INFO    | [VALIDATION] Validation Agent: status=VALID conf=1.00 | field=light_layer3 
+domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Learning Agent starting 
+processing\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Updated existing mapping memory entry for 
+'light_layer3' in domain 'hydroponics' (use_count=16).\r\n12:17:38 | enviromap.Learning Agent       | INFO    | 
+Learning Agent completed in 23.8ms\r\n12:17:38 | enviromap.rule_based_engine    | INFO    | Loaded 40 approved known 
+mappings from memory.\r\n12:17:38 | enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored 
+(valid=True) | field=light_layer3 domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.orchestrator         | INFO  
+  |     ph -> [KNOWN] Hydrogen Ion Concentration\r\n12:17:38 | enviromap.audit                | INFO    | [RULE_BASED] 
+Rule-Based Engine: Known -> Hydrogen Ion Concentration | field=ph domain=hydroponics | OK (0.0ms)\r\n12:17:38 | 
+enviromap.Validation Agent     | INFO    | Validation Agent starting processing\r\n12:17:38 | enviromap.Validation 
+Agent     | INFO    | Validation Result for 'ph' â†’ 'Hydrogen Ion Concentration': VALID (checks: 6/6 
+passed)\r\n12:17:38 | enviromap.Validation Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:38 | 
+enviromap.audit                | INFO    | [VALIDATION] Validation Agent: status=VALID conf=1.00 | field=ph 
+domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Learning Agent starting 
+processing\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Updated existing mapping memory entry for 'ph' in 
+domain 'hydroponics' (use_count=16).\r\n12:17:38 | enviromap.Learning Agent       | INFO    | Learning Agent completed 
+in 0.5ms\r\n12:17:38 | enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from 
+memory.\r\n12:17:38 | enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | 
+field=ph domain=hydroponics | OK (0.0ms)\r\n12:17:38 | enviromap.orchestrator         | INFO    |     
+water_temperature -> [UNKNOWN] Running alignment...\r\n12:17:38 | enviromap.Alignment Agent      | INFO    | Alignment 
+Agent starting processing\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+214.13it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 263.05it/s]\r\nBatches: 100%|â–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 361.30it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+| 1/1 [00:00<00:00, 258.73it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+377.63it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 275.74it/s]\r\nBatches: 100%|â–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 331.83it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+| 1/1 [00:00<00:00, 262.46it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+323.16it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 250.09it/s]\r\nBatches: 100%|â–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 268.95it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+| 1/1 [00:00<00:00, 271.85it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+274.64it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 270.55it/s]\r\nBatches: 100%|â–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 297.62it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+| 1/1 [00:00<00:00, 275.76it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+247.09it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 271.69it/s]\r\nBatches: 100%|â–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 310.94it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+| 1/1 [00:00<00:00, 276.80it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+317.25it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 272.30it/s]\r\nBatches: 100%|â–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 313.10it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+| 1/1 [00:00<00:00, 275.45it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+322.89it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 259.93it/s]\r\nBatches: 100%|â–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 287.66it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+| 1/1 [00:00<00:00, 270.71it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+308.31it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 259.08it/s]\r\nBatches: 100%|â–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 300.32it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+| 1/1 [00:00<00:00, 246.87it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+265.78it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 265.87it/s]\r\nBatches: 100%|â–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 280.16it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+| 1/1 [00:00<00:00, 268.42it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+275.49it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 269.56it/s]\r\nBatches: 100%|â–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 249.56it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+| 1/1 [00:00<00:00, 271.51it/s]\r\nBatches: 100%|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ
+–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 1/1 [00:00<00:00, 
+305.17it/s]\r\n12:17:39 | enviromap.Alignment Agent      | INFO    | Alignment for 'water_temperature' in domain 
+'hydroponics' returned 5 candidates. Top candidate: Water Temperature\r\n12:17:39 | enviromap.Alignment Agent      | 
+INFO    | Alignment Agent completed in 186.3ms\r\n12:17:39 | enviromap.audit                | INFO    | [ALIGNMENT] 
+Alignment Agent: 5 candidates | field=water_temperature domain=hydroponics | OK (0.0ms)\r\n12:17:39 | 
+enviromap.Mapping Agent        | INFO    | Mapping Agent starting processing\r\n12:17:39 | enviromap.Mapping Agent     
+   | INFO    | Mapping record prepared for 'water_temperature' with 5 candidates.\r\n12:17:39 | enviromap.Mapping 
+Agent        | INFO    | Mapping Agent completed in 0.0ms\r\n12:17:39 | enviromap.audit                | INFO    | 
+[MAPPING] Mapping Agent: 5 candidates | field=water_temperature domain=hydroponics | OK (0.0ms)\r\n12:17:39 | 
+enviromap.Reasoning Agent      | INFO    | Reasoning Agent starting processing\r\n12:17:39 | enviromap.Reasoning Agent 
+     | INFO    | Invoking LLM advisory for field 'water_temperature' (conf=1.00, ambiguous=True)\r\n12:17:39 | 
+enviromap.llm_advisory         | WARNING | LLM Advisory attempt 1 failed: GEMINI_API_KEY environment variable or 
+config key is missing.\r\n12:17:40 | enviromap.llm_advisory         | WARNING | LLM Advisory attempt 2 failed: 
+GEMINI_API_KEY environment variable or config key is missing.\r\n12:17:41 | enviromap.Reasoning Agent      | INFO    | 
+Reasoning decision for 'water_temperature': Water Temperature (conf=1.0, llm_used=False)\r\n12:17:41 | 
+enviromap.Reasoning Agent      | INFO    | Reasoning Agent completed in 2118.7ms\r\n12:17:41 | enviromap.audit         
+       | INFO    | [REASONING] Reasoning Agent: -> Water Temperature (conf=1.00) | field=water_temperature 
+domain=hydroponics | OK (0.0ms)\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation Agent starting 
+processing\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation Result for 'water_temperature' â†’ 
+'Water Temperature': VALID (checks: 4/6 passed)\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation 
+Agent completed in 0.1ms\r\n12:17:41 | enviromap.audit                | INFO    | [VALIDATION] Validation Agent: 
+status=VALID conf=0.85 | field=water_temperature domain=hydroponics | OK (0.0ms)\r\n12:17:41 | enviromap.Learning 
+Agent       | INFO    | Learning Agent starting processing\r\n12:17:41 | enviromap.Learning Agent       | INFO    | 
+Updated existing mapping memory entry for 'water_temperature' in domain 'hydroponics' (use_count=16).\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Learning Agent completed in 0.5ms\r\n12:17:41 | enviromap.rule_based_engine 
+   | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:41 | enviromap.audit                | INFO    | 
+[LEARNING] Learning Agent: Stored (valid=True) | field=water_temperature domain=hydroponics | OK (0.0ms)\r\n12:17:41 | 
+enviromap.orchestrator         | ERROR   | Domain hydroponics failed: name 'sensor_uri' is not defined\r\n12:17:41 | 
+enviromap.orchestrator         | INFO    | [ROUTER] 1 domain(s) remaining -> next_domain\r\n12:17:41 | 
+enviromap.orchestrator         | INFO    | \r\nâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€\r\n[Domain 2/2] air_quality | Air qualit
+y\r\nâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€\r\n12:17:41 | enviromap.orchestrator         | INFO    |   Table: public.air 
+quality 1\r\n12:17:41 | enviromap.Discovery Agent      | INFO    | Discovery Agent starting processing\r\n12:17:41 | 
+enviromap.Discovery Agent      | INFO    | Discovery profile created for 12 measurement fields in public.air quality 
+1\r\n12:17:41 | enviromap.Discovery Agent      | INFO    | Discovery Agent completed in 82.5ms\r\n12:17:41 | 
+enviromap.audit                | INFO    | [DISCOVERY] Discovery Agent: Profiled 12 fields | field=public.air quality 
+1 domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.DataAcquisition      | INFO    | [air quality 1] Initial 
+run: fetching ALL records (NO LIMIT)\r\n12:17:41 | enviromap.DataAcquisition      | INFO    | Watermark updated: Air 
+quality.air quality 1 = 2026-09-21 12:14:56.305000+05:30\r\n12:17:41 | enviromap.DataAcquisition      | INFO    | [air 
+quality 1] Fetched 780 records\r\n12:17:41 | enviromap.orchestrator         | INFO    |     aqi -> [KNOWN] Air Quality 
+Index\r\n12:17:41 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: Known -> Air Quality 
+Index | field=aqi domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation 
+Agent starting processing\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation Result for 'aqi' â†’ 
+'Air Quality Index': VALID (checks: 6/6 passed)\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation 
+Agent completed in 0.0ms\r\n12:17:41 | enviromap.audit                | INFO    | [VALIDATION] Validation Agent: 
+status=VALID conf=1.00 | field=aqi domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Learning Agent       | INFO 
+   | Learning Agent starting processing\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Updated existing 
+mapping memory entry for 'aqi' in domain 'air_quality' (use_count=16).\r\n12:17:41 | enviromap.Learning Agent       | 
+INFO    | Learning Agent completed in 0.5ms\r\n12:17:41 | enviromap.rule_based_engine    | INFO    | Loaded 40 
+approved known mappings from memory.\r\n12:17:41 | enviromap.audit                | INFO    | [LEARNING] Learning 
+Agent: Stored (valid=True) | field=aqi domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.orchestrator         | 
+INFO    |     ch4 -> [KNOWN] Methane Concentration\r\n12:17:41 | enviromap.audit                | INFO    | 
+[RULE_BASED] Rule-Based Engine: Known -> Methane Concentration | field=ch4 domain=air_quality | OK (0.0ms)\r\n12:17:41 
+| enviromap.Validation Agent     | INFO    | Validation Agent starting processing\r\n12:17:41 | enviromap.Validation 
+Agent     | INFO    | Validation Result for 'ch4' â†’ 'Methane Concentration': VALID (checks: 6/6 passed)\r\n12:17:41 
+| enviromap.Validation Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:41 | enviromap.audit         
+       | INFO    | [VALIDATION] Validation Agent: status=VALID conf=1.00 | field=ch4 domain=air_quality | OK 
+(0.0ms)\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Learning Agent starting processing\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Updated existing mapping memory entry for 'ch4' in domain 'air_quality' 
+(use_count=16).\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Learning Agent completed in 3.0ms\r\n12:17:41 
+| enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:41 | 
+enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | field=ch4 
+domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.orchestrator         | INFO    |     co -> [KNOWN] Carbon 
+Monoxide Concentration\r\n12:17:41 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: Known 
+-> Carbon Monoxide Concentration | field=co domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Validation Agent   
+  | INFO    | Validation Agent starting processing\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation 
+Result for 'co' â†’ 'Carbon Monoxide Concentration': VALID (checks: 6/6 passed)\r\n12:17:41 | enviromap.Validation 
+Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:41 | enviromap.audit                | INFO    | 
+[VALIDATION] Validation Agent: status=VALID conf=1.00 | field=co domain=air_quality | OK (0.0ms)\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Learning Agent starting processing\r\n12:17:41 | enviromap.Learning Agent   
+    | INFO    | Updated existing mapping memory entry for 'co' in domain 'air_quality' (use_count=16).\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Learning Agent completed in 25.0ms\r\n12:17:41 | 
+enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:41 | 
+enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | field=co 
+domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.orchestrator         | INFO    |     co2 -> [KNOWN] Carbon 
+Dioxide Concentration\r\n12:17:41 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: Known 
+-> Carbon Dioxide Concentration | field=co2 domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Validation Agent   
+  | INFO    | Validation Agent starting processing\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation 
+Result for 'co2' â†’ 'Carbon Dioxide Concentration': VALID (checks: 6/6 passed)\r\n12:17:41 | enviromap.Validation 
+Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:41 | enviromap.audit                | INFO    | 
+[VALIDATION] Validation Agent: status=VALID conf=1.00 | field=co2 domain=air_quality | OK (0.0ms)\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Learning Agent starting processing\r\n12:17:41 | enviromap.Learning Agent   
+    | INFO    | Updated existing mapping memory entry for 'co2' in domain 'air_quality' (use_count=16).\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Learning Agent completed in 20.4ms\r\n12:17:41 | 
+enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:41 | 
+enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | field=co2 
+domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.orchestrator         | INFO    |     humidity -> [KNOWN] 
+Humidity\r\n12:17:41 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: Known -> Humidity | 
+field=humidity domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation 
+Agent starting processing\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation Result for 'humidity' 
+â†’ 'Humidity': VALID (checks: 6/6 passed)\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation Agent 
+completed in 0.0ms\r\n12:17:41 | enviromap.audit                | INFO    | [VALIDATION] Validation Agent: 
+status=VALID conf=1.00 | field=humidity domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Learning Agent       | 
+INFO    | Learning Agent starting processing\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Updated existing 
+mapping memory entry for 'humidity' in domain 'air_quality' (use_count=16).\r\n12:17:41 | enviromap.Learning Agent     
+  | INFO    | Learning Agent completed in 20.6ms\r\n12:17:41 | enviromap.rule_based_engine    | INFO    | Loaded 40 
+approved known mappings from memory.\r\n12:17:41 | enviromap.audit                | INFO    | [LEARNING] Learning 
+Agent: Stored (valid=True) | field=humidity domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.orchestrator       
+  | INFO    |     lpg -> [KNOWN] LPG Concentration\r\n12:17:41 | enviromap.audit                | INFO    | 
+[RULE_BASED] Rule-Based Engine: Known -> LPG Concentration | field=lpg domain=air_quality | OK (0.0ms)\r\n12:17:41 | 
+enviromap.Validation Agent     | INFO    | Validation Agent starting processing\r\n12:17:41 | enviromap.Validation 
+Agent     | INFO    | Validation Result for 'lpg' â†’ 'LPG Concentration': VALID (checks: 6/6 passed)\r\n12:17:41 | 
+enviromap.Validation Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:41 | enviromap.audit           
+     | INFO    | [VALIDATION] Validation Agent: status=VALID conf=1.00 | field=lpg domain=air_quality | OK 
+(0.0ms)\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Learning Agent starting processing\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Updated existing mapping memory entry for 'lpg' in domain 'air_quality' 
+(use_count=16).\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Learning Agent completed in 0.4ms\r\n12:17:41 
+| enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:41 | 
+enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | field=lpg 
+domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.orchestrator         | INFO    |     nh4 -> [KNOWN] Ammonia 
+Concentration\r\n12:17:41 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: Known -> 
+Ammonia Concentration | field=nh4 domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Validation Agent     | INFO  
+  | Validation Agent starting processing\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation Result 
+for 'nh4' â†’ 'Ammonia Concentration': VALID (checks: 6/6 passed)\r\n12:17:41 | enviromap.Validation Agent     | INFO  
+  | Validation Agent completed in 0.0ms\r\n12:17:41 | enviromap.audit                | INFO    | [VALIDATION] 
+Validation Agent: status=VALID conf=1.00 | field=nh4 domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Learning 
+Agent       | INFO    | Learning Agent starting processing\r\n12:17:41 | enviromap.Learning Agent       | INFO    | 
+Updated existing mapping memory entry for 'nh4' in domain 'air_quality' (use_count=16).\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Learning Agent completed in 0.4ms\r\n12:17:41 | enviromap.rule_based_engine 
+   | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:41 | enviromap.audit                | INFO    | 
+[LEARNING] Learning Agent: Stored (valid=True) | field=nh4 domain=air_quality | OK (0.0ms)\r\n12:17:41 | 
+enviromap.orchestrator         | INFO    |     pm10 -> [KNOWN] PM10 Concentration\r\n12:17:41 | enviromap.audit        
+        | INFO    | [RULE_BASED] Rule-Based Engine: Known -> PM10 Concentration | field=pm10 domain=air_quality | OK 
+(0.0ms)\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation Agent starting processing\r\n12:17:41 | 
+enviromap.Validation Agent     | INFO    | Validation Result for 'pm10' â†’ 'PM10 Concentration': VALID (checks: 5/6 
+passed)\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:41 | 
+enviromap.audit                | INFO    | [VALIDATION] Validation Agent: status=VALID conf=0.81 | field=pm10 
+domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Learning Agent starting 
+processing\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Updated existing mapping memory entry for 'pm10' 
+in domain 'air_quality' (use_count=16).\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Learning Agent 
+completed in 0.5ms\r\n12:17:41 | enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from 
+memory.\r\n12:17:41 | enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | 
+field=pm10 domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.orchestrator         | INFO    |     pm25 -> 
+[KNOWN] PM2.5 Concentration\r\n12:17:41 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: 
+Known -> PM2.5 Concentration | field=pm25 domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Validation Agent     
+| INFO    | Validation Agent starting processing\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation 
+Result for 'pm25' â†’ 'PM2.5 Concentration': VALID (checks: 5/6 passed)\r\n12:17:41 | enviromap.Validation Agent     | 
+INFO    | Validation Agent completed in 0.0ms\r\n12:17:41 | enviromap.audit                | INFO    | [VALIDATION] 
+Validation Agent: status=VALID conf=0.81 | field=pm25 domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Learning 
+Agent       | INFO    | Learning Agent starting processing\r\n12:17:41 | enviromap.Learning Agent       | INFO    | 
+Updated existing mapping memory entry for 'pm25' in domain 'air_quality' (use_count=16).\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Learning Agent completed in 0.4ms\r\n12:17:41 | enviromap.rule_based_engine 
+   | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:41 | enviromap.audit                | INFO    | 
+[LEARNING] Learning Agent: Stored (valid=True) | field=pm25 domain=air_quality | OK (0.0ms)\r\n12:17:41 | 
+enviromap.orchestrator         | INFO    |     pm25_calibrated -> [KNOWN] Calibrated PM2.5 Concentration\r\n12:17:41 | 
+enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: Known -> Calibrated PM2.5 Concentration | 
+field=pm25_calibrated domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Validation Agent     | INFO    | 
+Validation Agent starting processing\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation Result for 
+'pm25_calibrated' â†’ 'Calibrated PM2.5 Concentration': VALID (checks: 5/6 passed)\r\n12:17:41 | enviromap.Validation 
+Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:41 | enviromap.audit                | INFO    | 
+[VALIDATION] Validation Agent: status=VALID conf=0.81 | field=pm25_calibrated domain=air_quality | OK 
+(0.0ms)\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Learning Agent starting processing\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Updated existing mapping memory entry for 'pm25_calibrated' in domain 
+'air_quality' (use_count=16).\r\n12:17:41 | enviromap.Learning Agent       | INFO    | Learning Agent completed in 
+0.4ms\r\n12:17:41 | enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from 
+memory.\r\n12:17:41 | enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | 
+field=pm25_calibrated domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.orchestrator         | INFO    |     
+smoke -> [KNOWN] Smoke Concentration\r\n12:17:41 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based 
+Engine: Known -> Smoke Concentration | field=smoke domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Validation 
+Agent     | INFO    | Validation Agent starting processing\r\n12:17:41 | enviromap.Validation Agent     | INFO    | 
+Validation Result for 'smoke' â†’ 'Smoke Concentration': VALID (checks: 6/6 passed)\r\n12:17:41 | enviromap.Validation 
+Agent     | INFO    | Validation Agent completed in 0.0ms\r\n12:17:41 | enviromap.audit                | INFO    | 
+[VALIDATION] Validation Agent: status=VALID conf=1.00 | field=smoke domain=air_quality | OK (0.0ms)\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Learning Agent starting processing\r\n12:17:41 | enviromap.Learning Agent   
+    | INFO    | Updated existing mapping memory entry for 'smoke' in domain 'air_quality' (use_count=16).\r\n12:17:41 
+| enviromap.Learning Agent       | INFO    | Learning Agent completed in 0.4ms\r\n12:17:41 | 
+enviromap.rule_based_engine    | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:41 | 
+enviromap.audit                | INFO    | [LEARNING] Learning Agent: Stored (valid=True) | field=smoke 
+domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.orchestrator         | INFO    |     temperature -> [KNOWN] 
+Temperature\r\n12:17:41 | enviromap.audit                | INFO    | [RULE_BASED] Rule-Based Engine: Known -> 
+Temperature | field=temperature domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Validation Agent     | INFO    
+| Validation Agent starting processing\r\n12:17:41 | enviromap.Validation Agent     | INFO    | Validation Result for 
+'temperature' â†’ 'Temperature': VALID (checks: 5/6 passed)\r\n12:17:41 | enviromap.Validation Agent     | INFO    | 
+Validation Agent completed in 0.0ms\r\n12:17:41 | enviromap.audit                | INFO    | [VALIDATION] Validation 
+Agent: status=VALID conf=0.81 | field=temperature domain=air_quality | OK (0.0ms)\r\n12:17:41 | enviromap.Learning 
+Agent       | INFO    | Learning Agent starting processing\r\n12:17:41 | enviromap.Learning Agent       | INFO    | 
+Updated existing mapping memory entry for 'temperature' in domain 'air_quality' (use_count=16).\r\n12:17:41 | 
+enviromap.Learning Agent       | INFO    | Learning Agent completed in 0.4ms\r\n12:17:41 | enviromap.rule_based_engine 
+   | INFO    | Loaded 40 approved known mappings from memory.\r\n12:17:41 | enviromap.audit                | INFO    | 
+[LEARNING] Learning Agent: Stored (valid=True) | field=temperature domain=air_quality | OK (0.0ms)\r\n12:17:41 | 
+enviromap.orchestrator         | ERROR   | Domain air_quality failed: name 'sensor_uri' is not defined\r\n12:17:41 | 
+enviromap.orchestrator         | INFO    | [ROUTER] All domains done -> build_kg\r\n12:17:41 | enviromap.orchestrator  
+       | INFO    | \r\n[BUILD_KG] 0 observations from 2 domain(s)\r\n12:17:41 | enviromap.kg                   | INFO  
+  | KG exported to Turtle: /home/cse-dept/semantic-interoperability-kg/data/output/enviromap_kg.ttl (3 
+triples)\r\n12:17:41 | enviromap.kg                   | INFO    | KG exported to JSON-LD: 
+/home/cse-dept/semantic-interoperability-kg/data/output/enviromap_kg.jsonld\r\n12:17:41 | enviromap.orchestrator       
+  | INFO    | [BUILD_KG] 3 triples exported\r\n12:17:41 | enviromap.orchestrator         | INFO    | [REPORT] Saved to 
+/home/cse-dept/semantic-interoperability-kg/data/output/pipeline_report.json\r\n12:17:41 | enviromap.orchestrator      
+   | INFO    | Pipeline complete in 3.2s | 
+triples=3\r\n\r\n============================================================\r\n  PIPELINE 
+RESULTS\r\n============================================================\r\n\r\n  ðŸ“Š Processing Statistics:\r\n     
+Total fields processed:  21\r\n     Known mappings (reused): 20\r\n     Unknown (new) mappings:  1\r\n     LLM 
+invocations:         0\r\n     Domains processed:       \r\n\r\n  âœ… Validation Summary:\r\n     Total validations:  
+0\r\n     Valid mappings:     0\r\n     Invalid mappings:   0\r\n\r\n  ðŸŒ Knowledge Graph:\r\n     Total triples:    
+  3\r\n     Total observations: 0\r\n\r\n  â±  Execution Time:     3.2s\r\n\r\n  ðŸ¤– Agent Performance:\r\n     
+discovery                2 executions  avg=89.0ms\r\n     alignment                1 executions  avg=186.3ms\r\n     
+mapping                  1 executions  avg=0.0ms\r\n     reasoning                1 executions  avg=2118.7ms\r\n     
+validation              21 executions  avg=0.0ms\r\n     learning                21 executions  avg=13.3ms\r\n\r\n  
+ðŸ“ Output Files:\r\n     data/output/enviromap_kg.ttl    (Turtle)\r\n     data/output/enviromap_kg.jsonld  
+(JSON-LD)\r\n     data/output/pipeline_report.json (Report)\r\n     data/audit_log.jsonl              (Audit 
+Trail)\r\n     data/mapping_memory.json          (Mapping 
+Memory)\r\n\r\n============================================================\r\n12:17:41 | enviromap.main               
+  | INFO    | Pipeline complete in 3.2s\r\n\r\nâœ… Pipeline complete! Total time: 
+3.2s\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-09-21T12:18:04+05:30.\n\nThe user's 
+current state is as follows:\nActive Document: c:\\Users\\Shreenithi\\Downloads\\start command.txt 
+(LANGUAGE_UNSPECIFIED)\nCursor is on line: 1\nOther open documents:\n- 
+c:\\Users\\Shreenithi\\.gemini\\antigravity\\scratch\\enviromap-kg\\orchestrator\\audit_logger.py 
+(LANGUAGE_UNSPECIFIED)\n- 
+c:\\Users\\Shreenithi\\.gemini\\antigravity\\scratch\\enviromap-kg\\scripts\\discover_database.py 
+(LANGUAGE_UNSPECIFIED)\n- c:\\Users\\Shreenithi\\.gemini\\antigravity\\scratch\\enviromap-kg\\scripts\\export_kg.py 
+(LANGUAGE_UNSPECIFIED)\n- c:\\Users\\Shreenithi\\.gemini\\antigravity\\scratch\\enviromap-kg\\tests\\test_agents.py 
+(LANGUAGE_UNSPECIFIED)\n- 
+c:\\Users\\Shreenithi\\.gemini\\antigravity\\scratch\\enviromap-kg\\tests\\test_end_to_end.py 
+(LANGUAGE_UNSPECIFIED)\n</ADDITIONAL_METADATA>"}
+
+

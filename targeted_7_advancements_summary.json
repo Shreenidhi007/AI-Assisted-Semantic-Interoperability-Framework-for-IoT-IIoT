@@ -1,0 +1,71 @@
+[
+  {
+    "module": "1.2 Cross-Encoder Micro-Batching",
+    "file": "reranker.py",
+    "status": "PASSED",
+    "top_concept": "https://saref.etsi.org/saref4watr/Temperature",
+    "top_score": 0.2637,
+    "execution_time_ms": 121425.8,
+    "mechanism": "Vectorized micro-batched cross-attention (batch_size=16)"
+  },
+  {
+    "module": "1.3 Dynamic Incremental Ontology Index",
+    "file": "dynamic_ontology_index.py",
+    "status": "PASSED",
+    "initial_concepts": 2,
+    "dynamically_added": 2,
+    "total_active_concepts": 4,
+    "query_retrieved": "HeartRate",
+    "append_time_ms": 94.53,
+    "mechanism": "Zero-restart incremental vector space expansion"
+  },
+  {
+    "module": "1.4 Composite Context Multi-Vector Matcher",
+    "file": "composite_context_matcher.py",
+    "status": "PASSED",
+    "composite_query": "water temperature measured at 2m depth inside...",
+    "matched_concept": "https://saref.etsi.org/saref4watr/Temperature",
+    "maxsim_score": 0.8623,
+    "execution_time_ms": 2631.46,
+    "mechanism": "ColBERT token-level late interaction MaxSim operator"
+  },
+  {
+    "module": "2.1 Hybrid Dual-Store Dispatcher",
+    "file": "hybrid_storage_dispatcher.py",
+    "status": "PASSED",
+    "total_numeric_ticks_buffered": 25,
+    "total_triples_generated": 100,
+    "batch_flushes_executed": 2,
+    "ingest_throughput_ticks_sec": 54933,
+    "mechanism": "Time-series micro-batching + W3C SOSA RDF triple segregation"
+  },
+  {
+    "module": "2.2 Semantic Query Cache",
+    "file": "semantic_query_cache.py",
+    "status": "PASSED",
+    "cache_hit_latency_ms": 0.006,
+    "hit_rate_pct": 50.0,
+    "cached_data_length": 1,
+    "mechanism": "SHA-256 cryptographic query hashing with automated TTL eviction"
+  },
+  {
+    "module": "5.1 Quantization-Aware Training (QAT)",
+    "file": "qat_quantizer.py",
+    "status": "PASSED",
+    "qat_calibrated_fidelity": 0.999955,
+    "precision_loss_pct": "0.0045%",
+    "fidelity_improvement": "+0.001%",
+    "calibration_time_ms": 7.66,
+    "mechanism": "Symmetric 8-bit fake-quantization regularization"
+  },
+  {
+    "module": "5.2 Adaptive Hardware Runtime Selector",
+    "file": "adaptive_hardware_selector.py",
+    "status": "PASSED",
+    "host_cpu": "12th Gen Intel(R) Core(TM) i5-1235U",
+    "selected_engine": "FP32_LORA_THREADED_ENGINE",
+    "acceleration_mode": "Multi-Threaded BLAS / OpenMP",
+    "bound_class": "EmbeddingModel",
+    "mechanism": "Autonomous CPU instruction register probing (AVX-512 / VNNI / NEON)"
+  }
+]

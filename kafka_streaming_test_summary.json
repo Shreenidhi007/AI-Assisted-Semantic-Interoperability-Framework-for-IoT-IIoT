@@ -1,0 +1,40 @@
+{
+  "test_1_multi_protocol_ingress": {
+    "passed": true,
+    "protocols_covered": [
+      "oneM2M",
+      "CoAP",
+      "AMQP",
+      "OPC_UA",
+      "MQTT",
+      "HTTP"
+    ]
+  },
+  "test_2_fast_path_latency": {
+    "passed": true,
+    "fast_path_count": 4,
+    "average_latency_us": 1.73
+  },
+  "test_3_cryptic_cold_start": {
+    "passed": true,
+    "inferred_concept": "https://saref.etsi.org/saref4watr/HydrogenIonConcentration"
+  },
+  "test_4_fast_path_transition": {
+    "passed": true
+  },
+  "test_5_dual_store_formatting": {
+    "passed": true,
+    "sample_triples": [
+      "<urn:observation:tank_99:1790680487> a sosa:Observation .",
+      "<urn:observation:tank_99:1790680487> sosa:madeBySensor <urn:sensor:tank_99> .",
+      "<urn:observation:tank_99:1790680487> sosa:observedProperty <https://saref.etsi.org/saref4watr/HydrogenIonConcentration> .",
+      "<urn:observation:tank_99:1790680487> sosa:hasSimpleResult \"8.22\"^^xsd:double ."
+    ]
+  },
+  "summary": {
+    "total_tests": 5,
+    "passed_tests": 5,
+    "success_rate_percent": 100.0,
+    "timestamp": 1790680487.380969
+  }
+}
